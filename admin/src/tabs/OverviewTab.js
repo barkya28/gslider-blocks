@@ -78,6 +78,20 @@ const OverviewTab = ( {
 		);
 	}
 
+	let coreModulesBadge = null;
+	if ( ! hasError && ! isLoading && typeof totalBlocks === 'number' ) {
+		coreModulesBadge = sprintf(
+			/* translators: %d: number of core modules */
+			_n(
+				'%d Core Module',
+				'%d Core Modules',
+				totalBlocks,
+				'gslider-blocks'
+			),
+			totalBlocks
+		);
+	}
+
 	return (
 		<div className="gslider-dashboard-overview">
 			{ /* Section 1: Hero Banner */ }
@@ -180,17 +194,7 @@ const OverviewTab = ( {
 						</button>
 					}
 					icon={ <BlocksMetricIcon /> }
-					badge={
-						hasError
-							? null
-							: totalBlocks === undefined || isLoading
-						? null
-						: sprintf(
-							/* translators: %d: number of core modules */
-							_n( '%d Core Module', '%d Core Modules', totalBlocks, 'gslider-blocks' ),
-							totalBlocks
-						  )
-					}
+					badge={ coreModulesBadge }
 				/>
 
 				{ /* Card 3: Modern Architecture Highlight */ }
